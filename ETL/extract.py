@@ -43,7 +43,7 @@ def extract_data():
                 )
             
                 weather_df.to_csv(
-                    f"../data/{today_day}_weather_data.csv", mode="a", header=True, index=False
+                    f"../data/{today_day}_weather_data.csv", mode="a", header=False, index=False
                 )
             print("Data extracted and saved to data/weather_data.csv")
 
