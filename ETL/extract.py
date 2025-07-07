@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
+from datetime import datetime
 import pandas as pd
 import os
 import requests
 
-
+today_day = datetime.today().date()
 def extract_data():
     """
     Extracts data from the OpenWeather API and returns a DataFrame.
@@ -40,8 +41,11 @@ def extract_data():
                         "pressure": [pressure],
                     }
                 )
-
-                print(weather_df)
+            
+                weather_df.to_csv(
+                    f"../data/{today_day}_weather_data.csv", mode="a", header=True, index=False
+                )
+            print("Data extracted and saved to data/weather_data.csv")
 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data from API: {e}")
