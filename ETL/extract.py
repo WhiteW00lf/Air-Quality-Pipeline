@@ -5,6 +5,8 @@ import os
 import requests
 
 today_day = datetime.today().date()
+
+
 def extract_data():
     """
     Extracts data from the OpenWeather API and returns a DataFrame.
@@ -41,9 +43,12 @@ def extract_data():
                         "pressure": [pressure],
                     }
                 )
-            
+
                 weather_df.to_csv(
-                    f"../data/{today_day}_weather_data.csv", mode="a", header=False, index=False
+                    f"../data/{today_day}_weather_data.csv",
+                    mode="a",
+                    header=False,
+                    index=False,
                 )
             print("Data extracted and saved to data/weather_data.csv")
 
