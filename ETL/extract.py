@@ -52,7 +52,7 @@ def extract_data():
 
                
                 # Save the DataFrame to a CSV file
-                file_name = f"../data/air_quality_data_{today_day}.csv"
+                file_name = "airquality.csv"
                 if not os.path.exists(file_name):
                     air_quality_df.to_csv(file_name, index=False)
                 else:
