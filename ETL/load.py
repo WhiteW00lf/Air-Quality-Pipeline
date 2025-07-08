@@ -31,6 +31,4 @@ def upload_to_s3():
         print(f"Failed to upload file to S3: {e}")
 
 
-test_conn()
 
-upload_to_s3()

@@ -39,4 +39,4 @@ def read_csv():
         # Drop rows with NaN values
 
 
-read_csv()
+

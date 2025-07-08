@@ -66,7 +66,7 @@ def extract_data():
         print(f"Error fetching data from API: {e}")
 
 
-extract_data()
+
 
 # Mumbai
 # lat = 19.0785451
