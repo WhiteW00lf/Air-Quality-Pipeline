@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
-
+import os
+os.chdir('/home/ubuntu/DE_projects/Air-Quality-Pipeline/data')
 
 def read_csv():
     """
