@@ -1,7 +1,9 @@
 import pandas as pd
 from datetime import datetime
 import os
-os.chdir('/home/ubuntu/DE_projects/Air-Quality-Pipeline/data')
+
+os.chdir("/home/ubuntu/DE_projects/Air-Quality-Pipeline/data")
+
 
 def read_csv():
     """
@@ -24,7 +26,7 @@ def read_csv():
         df["nh3"] = df["nh3"].astype(float)
         df["aqi"] = df["aqi"].astype(int)
         return df
-        
+
     except FileNotFoundError:
         print("File not found. Please ensure the file exists.")
         return pd.DataFrame()  # Return an empty DataFrame if the file does not exist

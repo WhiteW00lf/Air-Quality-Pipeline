@@ -22,17 +22,19 @@ def extract_data():
         if response.status_code == 200:
             data = response.json()
             # Extract relevant data from the JSON response
-            for item in data['list']:
-                created_at = datetime.fromtimestamp(item['dt']).strftime('%Y-%m-%d %H:%M:%S')
-                aqi = item['main']['aqi']
-                co = item['components']['co']
-                no = item['components']['no']
-                no2 = item['components']['no2']
-                o3 = item['components']['o3']
-                so2 = item['components']['so2']
-                pm2_5 = item['components']['pm2_5']
-                pm10 = item['components']['pm10']
-                nh3 = item['components']['nh3']     
+            for item in data["list"]:
+                created_at = datetime.fromtimestamp(item["dt"]).strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                )
+                aqi = item["main"]["aqi"]
+                co = item["components"]["co"]
+                no = item["components"]["no"]
+                no2 = item["components"]["no2"]
+                o3 = item["components"]["o3"]
+                so2 = item["components"]["so2"]
+                pm2_5 = item["components"]["pm2_5"]
+                pm10 = item["components"]["pm10"]
+                nh3 = item["components"]["nh3"]
 
                 # Create a DataFrame for each day's data
                 air_quality_df = pd.DataFrame(
@@ -46,17 +48,18 @@ def extract_data():
                         "so2": [so2],
                         "pm2_5": [pm2_5],
                         "pm10": [pm10],
-                        "nh3": [nh3]
+                        "nh3": [nh3],
                     }
                 )
 
-               
                 # Save the DataFrame to a CSV file
                 file_name = "airquality.csv"
-                if not os.path.exists(f'../data/{file_name}'):
-                    air_quality_df.to_csv(f'../data/{file_name}', index=False)
+                if not os.path.exists(f"../data/{file_name}"):
+                    air_quality_df.to_csv(f"../data/{file_name}", index=False)
                 else:
-                    air_quality_df.to_csv(f'../data/{file_name}', mode='a', header=False, index=False)
+                    air_quality_df.to_csv(
+                        f"../data/{file_name}", mode="a", header=False, index=False
+                    )
                 print(f"Data extracted and saved to {file_name}")
 
     except requests.exceptions.RequestException as e:
