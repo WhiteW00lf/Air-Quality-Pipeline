@@ -53,10 +53,10 @@ def extract_data():
                
                 # Save the DataFrame to a CSV file
                 file_name = "airquality.csv"
-                if not os.path.exists(file_name):
-                    air_quality_df.to_csv(file_name, index=False)
+                if not os.path.exists(f'../data/{file_name}'):
+                    air_quality_df.to_csv(f'../data/{file_name}', index=False)
                 else:
-                    air_quality_df.to_csv(file_name, mode='a', header=False, index=False)
+                    air_quality_df.to_csv(f'../data/{file_name}', mode='a', header=False, index=False)
                 print(f"Data extracted and saved to {file_name}")
 
     except requests.exceptions.RequestException as e:
