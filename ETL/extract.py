@@ -14,43 +14,50 @@ def extract_data():
     # Load environment variables
     load_dotenv()
     mykey = os.getenv("myapikey")
-    url = f"https://api.openweathermap.org/data/3.0/onecall?lat=19.0785451&lon=72.878176&appid={mykey}&exclude=minutely,hourly,alerts&units=metric"
+    url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat=19.0785451&lon=72.878176&appid={mykey}"
     # print(url)
     try:
         response = requests.get(url)
         # Check if the request was successful
         if response.status_code == 200:
             data = response.json()
-            for each_day in data["daily"]:
-                created_at = pd.to_datetime(each_day["dt"], unit="s")
-                temp = each_day["temp"]["day"]
-                humidity = each_day["humidity"]
-                description = each_day["weather"][0]["description"]
-                clouds = each_day["clouds"]
-                wind_speed = each_day["wind_speed"]
-                pressure = each_day["pressure"]
+            # Extract relevant data from the JSON response
+            for item in data['list']:
+                created_at = datetime.fromtimestamp(item['dt']).strftime('%Y-%m-%d %H:%M:%S')
+                aqi = item['main']['aqi']
+                co = item['components']['co']
+                no = item['components']['no']
+                no2 = item['components']['no2']
+                o3 = item['components']['o3']
+                so2 = item['components']['so2']
+                pm2_5 = item['components']['pm2_5']
+                pm10 = item['components']['pm10']
+                nh3 = item['components']['nh3']     
 
                 # Create a DataFrame for each day's data
-
-                weather_df = pd.DataFrame(
+                air_quality_df = pd.DataFrame(
                     {
                         "created_at": [created_at],
-                        "temp": [temp],
-                        "humidity": [humidity],
-                        "description": [description],
-                        "clouds": [clouds],
-                        "wind_speed": [wind_speed],
-                        "pressure": [pressure],
+                        "aqi": [aqi],
+                        "co": [co],
+                        "no": [no],
+                        "no2": [no2],
+                        "o3": [o3],
+                        "so2": [so2],
+                        "pm2_5": [pm2_5],
+                        "pm10": [pm10],
+                        "nh3": [nh3]
                     }
                 )
 
-                weather_df.to_csv(
-                    f"../data/{today_day}_weather_data.csv",
-                    mode="a",
-                    header=False,
-                    index=False,
-                )
-            print("Data extracted and saved to data/weather_data.csv")
+               
+                # Save the DataFrame to a CSV file
+                file_name = f"../data/air_quality_data_{today_day}.csv"
+                if not os.path.exists(file_name):
+                    air_quality_df.to_csv(file_name, index=False)
+                else:
+                    air_quality_df.to_csv(file_name, mode='a', header=False, index=False)
+                print(f"Data extracted and saved to {file_name}")
 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data from API: {e}")
