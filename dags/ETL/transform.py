@@ -37,6 +37,3 @@ def read_csv():
         # Return an empty DataFrame in case of any other error
 
         # Drop rows with NaN values
-
-
-

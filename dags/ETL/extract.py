@@ -66,8 +66,6 @@ def extract_data():
         print(f"Error fetching data from API: {e}")
 
 
-
-
 # Mumbai
 # lat = 19.0785451
 # lon= 72.878176
