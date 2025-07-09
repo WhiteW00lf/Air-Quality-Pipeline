@@ -26,3 +26,19 @@
 - **Amazon EC2**  
 
 ## 🖼️ Diagram of the ETL process.
+
+![ETL diagram of the project](image-2.png)
+
+## How do I run this project?
+
+- You need to sign up for AWS.Learn EC2, S3, Glue and Athena.
+- You need your own AWS access and secret keys to configure the project.
+- Only then clone this project and run the dag through Airflow.
+
+
+
+
+-------
+
+
+*Made with lots of ❤️ in VS Code and Python.*
